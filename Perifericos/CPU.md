@@ -8,7 +8,7 @@ Existem duas categorias que podem impactar no consumo, são elas:
 
 A  seguir veremos alguns pontos que podem impactar ou ajudar a mitigar o consumo elevado de processamento, levando-se em conta a  storage engine **MMAPV**.
 
-###User CPU
+####User CPU
 ----------
 
 **Consultas:** 
@@ -27,7 +27,7 @@ Recursos utilizados do lado do servidor, tais como **Map-Reduce** e **Intensive 
 **V8 (JavaScript engine):**
 O driver V8, pode ser um aliado bastante interessante, pois trabalha bem o **paralelismo**, além de ser uma opção moderna, podendo contribuir para melhoria de desempenho, em recursos **javascript**, do lado do servidor.
 
-###System CPU
+####System CPU
 ----------
 ###### *não consideraremos recursos de I/O, apenas coisas que resultam nos processos do MongoDB, pois melhorias realizadas no MongoDB não anularão o consumo desses recursos.
 
