@@ -34,8 +34,5 @@ System CPU
 **"Scan em grandes partes da memória:"**
 A varredura de grandes lotes de tabela e índices, por exemplo, assim como atualizações, de forma frequente, podem consumir porcentagens consideráveis, podendo variar entre 20% a 30% do CPU, não que seja uma problema em alguns casos, mas é algo no qual devemos atentar.
 
-**TCMalloc - Thread-Caching Malloc:**
-O sistema de alocação de memória do mongoDB, foi modificado para tcmalloc a partir da verão 2.2, devido a problemas em suas versões anteriores com o sistema de alocação malloc que era utilizado como padrão.
-
 **Considerações formais:**
 Quando possível MongoDB usará múltiplos CPUs de processamento, porém, existe algumas funções e padrões que consumirão recursos intensivo da CPU e ocasionalmente estará virgulado a uma unica CPU e nesse casos a velocidade de processamento e muito importante, ou seja, quanto mais melhor. No geral MongoDB tirará proveito de múltiplos processadores, não sendo uma preocupação o aumento de velocidade, mas em casos específicos tal aumento deve ser considerado. 
