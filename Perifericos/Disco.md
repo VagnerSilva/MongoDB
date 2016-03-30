@@ -99,3 +99,9 @@ Em um conjunto de replicas  não temos a necessidade de se preocupa,  se temos 2
   
 Pois basta excluirmos os dados de uma **replica segundaria** e **ressincronizarmos**  com a **replica primaria** , fazendo o mesmo procedimento para as demais replicas.
 A desvantagem e que ao realizarmos esse procedimento devemos ter em mente que **todos os dados** serão **transferidos pela rede**, com isso,  sabemos que a rede deve ser boa.
+
+####Monitoração
+----------
+O MongoDB não efetua a monitoração do espaço do disco. 
+Sendo assim, cabe a nós efetuarmos tal monitoramento, verificando sempre se a espaço suficiente para que a aplicação consegui inserir novos dados, pois o MongoDB só emitirá alertas quando não houver mais espaço, o que não podemos deixar ocorrer.
+Com isso e sempre bom e **fundamental** a  utilização de ferramentas fora do MongoDB, que tenham a capacidade de efetuar a monitoração do espaço em disco e que possa nos avisar de quanto uma determinado porcentagem de espaço foi consumida (no geral 80% da capacidade do disco), para que possamos tomar uma ação preventiva.
