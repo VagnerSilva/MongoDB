@@ -41,4 +41,4 @@ Vejamos na image o consumo do disco numa suposta inicialização, onde optamos p
 
 Na imagem, podemos perceber que numa simples inicialização facilmente consumimos  aproximados **8,20%** do espaço disponível, porém o MongoDB nos da opções para atenuarmos esse consumo.
 Podemos, por exemplo, configura o **oplog** para consumir **1GB**,
-configura o journal , utilizando  a opção de **smallfiles** ou modificar o mecanismo de armazenamento para utilização do engine **WiredTiger**, que consumo o mesmo **384MB** no máximo.
+configura o journal , utilizando  a opção de **smallfiles** ou modificar o mecanismo de armazenamento para utilização do engine **WiredTiger**, que consome o mesmo **384MB** no máximo.
