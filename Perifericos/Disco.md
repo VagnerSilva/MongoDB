@@ -60,3 +60,42 @@ Na movimentação de dados , fisicamente nada esta sendo de fato a locado na pr�
 ![mov](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/mov.png)
 
 Ou seja, uma simples movimentação de documento pode ocasionar um aumento no consumo e vale ressaltar que esse aumento não vai se reverter sem intervenção manual.
+
+
+####Recuperando espaço em disco
+----------
+Até aqui vimos como funciona o pré-alocação dos dados no bancos de dados e sabemos que as atualizações, movimentações, dos dados acabam reservando espaços que não estão de fato sendo utilizados.
+Então, agora veremos alguns meios de recuperarmos alguns desses espaços.
+
+**Compact Command**
+
+```js
+db.runCommand( { compact: <collectionName> } )
+```
+
+Ao contrario do que pensamos , **compact** não diminuir o tamanho em disco , caso estejamos utilizando como storage engine o **MMPAv1** , ele apenas desfragmenta e reescreves todos os dados e índices de uma coleção (**collection**).
+
+Desta forma, como o campact efetua desfragmentação
+ocasiona na movimentação dos dados, e como sabemos isso pode leva a um aumento,
+
+Já com a utilização do padrão do sistema de armazenamento na versão 3.2, **WiredTiger** o comando irá liberar espaço em disco para o sistema operacional. 
+Porém irá reescreve as coleção e índices, sendo útil nos casos de remoção de grande quantidade de dados.
+
+
+**Repair Command**
+
+```js
+db.runCommand( { repairDatabase: 1 } )
+```
+O **repair** e similar ao processo realizado no padrão **WiredTiger** do **compact** , onde ele reescreve os dados, porém também tenta recupera arquivos corrompidos.
+
+Porém, devemos fazer uma ressalva no processo de reescrita dos dados.
+Pois como os dados serão reescritos e necessário que haja a mesma quantidade de dados da base na qual estamos reparando. Assim ele criará um arquivo novo com seu tamanho "correto" e removera a estrutura antiga.
+
+![reoair](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/repair.png)
+
+**Replica Sets**
+Em um conjunto de replicas  não temos a necessidade de se preocupa,  se temos 2 vezes o espaço em disco ou não.
+  
+Pois basta excluirmos os dados de uma **replica segundaria** e **ressincronizarmos**  com a **replica primaria** , fazendo o mesmo procedimento para as demais replicas.
+A desvantagem e que ao realizarmos esse procedimento devemos ter em mente que **todos os dados** serão **transferidos pela rede**, com isso,  sabemos que a rede deve ser boa.
