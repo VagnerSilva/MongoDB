@@ -6,9 +6,9 @@ Existem duas categorias que podem impactar no consumo, são elas:
 
 > **System CPU:** que são os recursos consumidos pelo sistema.
 
-A  seguir veremos alguns pontos que podem impactar ou ajudar a mitigar o consumo elevado de processamento, levando-se em conta a  storage engine **MMAPV**.
+A  seguir veremos alguns pontos que podem impactar ou ajudar a mitigar o consumo elevado de processamento, levando-se em conta a  storage engine **MMAPv1**.
 
-User CPU
+####User CPU
 ----------
 
 **Consultas:** 
@@ -27,15 +27,13 @@ Recursos utilizados do lado do servidor, tais como **Map-Reduce** e **Intensive 
 **V8 (JavaScript engine):**
 O driver V8, pode ser um aliado bastante interessante, pois trabalha bem o **paralelismo**, além de ser uma opção moderna, podendo contribuir para melhoria de desempenho, em recursos **javascript**, do lado do servidor.
 
-System CPU
+####System CPU
 ----------
-###### *não consideraremos recursos de I/O, apenas coisas que resultam nos processos do MongoDB, pois melhorias realizadas no MongoDB não anularão o consumo desses recursos.
+###### *não consideraremos recursos de I/O, apenas coisas que resultam nos processos do MongoDB, pois melhorias realizadas no MongoDB não anularão o consumo dos recursos utilizados pelo I/O.
 
 **"Scan em grandes partes da memória:"**
 A varredura de grandes lotes de tabela e índices, por exemplo, assim como atualizações, de forma frequente, podem consumir porcentagens consideráveis, podendo variar entre 20% a 30% do CPU, não que seja uma problema em alguns casos, mas é algo no qual devemos atentar.
 
-**TCMalloc - Thread-Caching Malloc:**
-O sistema de alocação de memória do mongoDB, foi modificado para tcmalloc a partir da verão 2.2, devido a problemas em suas versões anteriores com o sistema de alocação malloc que era utilizado como padrão.
-
 **Considerações formais:**
-Quando possível MongoDB usará múltiplos CPUs de processamento, porém, existe algumas funções e padrões que consumirão recursos intensivo da CPU e ocasionalmente estará virgulado a uma unica CPU e nesse casos a velocidade de processamento e muito importante, ou seja, quanto mais melhor. No geral MongoDB tirará proveito de múltiplos processadores, não sendo uma preocupação o aumento de velocidade, mas em casos específicos tal aumento deve ser considerado. 
+Quando possível MongoDB usará múltiplos CPUs de processamento, porém, existe algumas funções e padrões que consumirão recursos intensivo da CPU e ocasionalmente estará virgulado a uma unica CPU e nesse casos a velocidade de processamento e muito importante, ou seja, quanto mais melhor. 
+No geral MongoDB tirará proveito de múltiplos processadores, não sendo uma preocupação o aumento de velocidade, mas em casos específicos tal aumento deve ser considerado. 
