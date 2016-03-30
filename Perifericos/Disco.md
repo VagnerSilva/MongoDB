@@ -35,10 +35,12 @@ Considerando que temos  uma unidade de **100GB**, onde usaremos um conjunto de r
 
  Sendo assim, sabemos que  o oplog será gerado e consumira **5% do espaço livre.**
 Considerando que temos **100GB  de espaço livre**, desta forma, teríamos **5GB**   de espaço sendo pré-alocado.
-Vejamos na image o consumo do disco numa suposta inicialização, onde optamos pela engine MMPAv1 , e adicionaremos uma restauração de **250MB**.
+Vejamos na image o consumo do disco numa suposta inicialização, onde optamos pela engine **MMPAv1**.
 
 ![ex1](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/ex1.png)
 
 Na imagem, podemos perceber que numa simples inicialização facilmente consumimos  aproximados **8,20%** do espaço disponível, porém o MongoDB nos da opções para atenuarmos esse consumo.
 Podemos, por exemplo, configura o **oplog** para consumir **1GB**,
-configura o journal , utilizando  a opção de **smallfiles** ou modificar o mecanismo de armazenamento para utilização do engine **WiredTiger**, que consome o mesmo **384MB** no máximo.
+configura o journal , utilizando  a opção de **smallfiles** que consome**384MB** no máximo, em seguida, a atribuição  inicial e fatorada por 4, passando de 64MB para 16MB e sua pré-alocação de 128MB para 32MB, o que e bastente significativo
+
+![ex2](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/ex2.png)
