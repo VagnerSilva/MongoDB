@@ -40,7 +40,11 @@ Vejamos na image o consumo do disco numa suposta inicialização, onde optamos p
 ![ex1](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/ex1.png)
 
 Na imagem, podemos perceber que numa simples inicialização facilmente consumimos  aproximados **8,20%** do espaço disponível, porém o MongoDB nos da opções para atenuarmos esse consumo.
+
 Podemos, por exemplo, configura o **oplog** para consumir **1GB**,
-configura o journal , utilizando  a opção de **smallfiles** que consome**384MB** no máximo, em seguida, a atribuição  inicial e fatorada por 4, passando de 64MB para 16MB e sua pré-alocação de 128MB para 32MB, o que e bastente significativo
+configura o journal , para utilizar  a opção de **smallfiles** que consome **384MB**, no máximo, em seguida, a atribuição  inicial e fatorada por 4, passando de **64MB** para **16MB** e sua pré-alocação de **128MB** para **32MB**, o que e bastente significativo
 
 ![ex2](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/ex2.png)
+
+A imagem nos mostra bem o ganho de espaço com apenas configurações simples. 
+Isso por que não mencionamos a utilização do mecanismo de armazenamento **WiredTiger**  e seus métodos de compressão, pois estamos apenas dando alguma ideia de fatores que devemos levar em consideração ao utilizarmos o banco de dados.
