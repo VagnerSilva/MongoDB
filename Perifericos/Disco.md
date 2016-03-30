@@ -10,12 +10,12 @@ Por padrão quando inserimos algo  em um banco  de dados e gerado um arquivo de 
 
 Esse  tamanho vai se duplicando até atingir seu tamanho máximo que e de **2048MB** (2 GigaBytes).
 
-![alocação](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/aloca.png)
+Subconjunto de dados: ![alocação](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/aloca.png)
 
 
 Porém, esse arquivo de **2GB** sempre está vazio, ou seja, esta pré-alocando, garantindo que esse espaço esteja disponível para quando os dados atingirem essa capacidade.
 
-Assim sendo, quando inserimos dados num banco e atingindo um determinado valor de alocação um arquivo de pré-alocação e gerado.
+Assim sendo, quando inserimos dados num banco, ao alocar esse dado um arquivo de pré-alocação e gerado.
 
 ![pre-alocado](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/pre-aloca.png)
 
@@ -47,4 +47,16 @@ configura o journal , para utilizar  a opção de **smallfiles** que consome **3
 ![ex2](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/ex2.png)
 
 A imagem nos mostra bem o ganho de espaço com apenas configurações simples. 
-Isso por que não mencionamos a utilização do mecanismo de armazenamento **WiredTiger**  e seus métodos de compressão, pois estamos apenas dando alguma ideia de fatores que devemos levar em consideração ao utilizarmos o banco de dados.
+Isso por que não mencionamos a utilização do mecanismo de armazenamento **WiredTiger**  e seus métodos de compressão (que iremos ver em outra oportunidade), ou, até mesmo a abdicação do uso do **journal**, utilizando o parâmetro  de configuração **nojournal**, em casos que não precisamos nos preocupar com a durabilidade dos dados,  pois estamos apenas dando alguma ideia de fatores que devemos levar em consideração ao utilizarmos o banco de dados, para auxilio do gerenciamento do espaço em disco.
+
+####Atualizações
+----------
+Sabemos que ao inserimos um dado no banco, uma arquivo de  pré-alocação e gerado, 
+
+![pre](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/pre.png)
+
+Na movimentação de dados , fisicamente nada esta sendo de fato a locado na pré-alocação, porém se por uns instante alguma alteração, persistir alguma informação no subconjunto pré-alocado ou o documento que esta sendo movimento seja maior do que o espaço pre-alocado, um novo arquivo de pré-alocação será gerado.
+
+![mov](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/mov.png)
+
+Ou seja, uma simples movimentação de documento pode ocasionar um aumento no consumo e vale ressaltar que esse aumento não vai se reverter sem intervenção manual.
