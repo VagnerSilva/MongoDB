@@ -19,14 +19,14 @@ Quando isso ocorre, temos um novo conceito aqui.
 
 #### Substituição de página
 ----------
-Quando **a memória atingir seu limite**, **e necessário  encontra espaço**, para o o próximo conteúdo ([página](https://pt.wikipedia.org/wiki/Mem%C3%B3ria_paginada)) seja alocado na memoria.
+Quando **a memória atingir seu limite**, **e necessário  encontra espaço**, para que o próximo conteúdo ([página](https://pt.wikipedia.org/wiki/Mem%C3%B3ria_paginada)) seja alocado na memoria.
 Sendo assim, **e preciso encontra um página para descarte e escreve esse conteúdo, de descarte, no disco** para que a nova página seja alocada na memória.
 
 A decisão para escolha da página de descarte e realizada com base no algoritmo **LRU**  (Least Recently Used) , como o nome sugere, e a parte da memoria menos acessada.
 
 #### Memória residente
 ----------
-Basicamente são parte da memória que não podem ser substituídas e ficam sempre na memória.
+Basicamente é a parte da memória que não podem ser substituídas e ficam sempre na memória.
 O mongoDB trabalha esse conceito através dos seguintes pontos.
 
 **Conjunto de trabalho (Working Set)**:
