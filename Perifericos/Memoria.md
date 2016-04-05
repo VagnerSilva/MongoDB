@@ -3,8 +3,7 @@
 #### Mapeamento de memória
 ----------
 
-E implementada através do sistema [**MMAP**](https://pt.wikipedia.org/wiki/Mmap), de modo sucinto, ele **mapeai  todos os arquivos em um espaço endereçável na memória virtual**; Sendo assim, **não acessa** esses dados na **memória física** e **sim** os dados que estão **no disco**.
- Dessa forma o MongoDB, por sua vez, acessa esses dados **como se fosse a memória física**, conforme sua necessidade, **consequentemente, carregando e acessa esses dados em memória**.
+E implementada através do sistema [**MMAP**](https://pt.wikipedia.org/wiki/Mmap), de modo sucinto, ele **mapeai  todos os arquivos em um espaço endereçável na memória virtual**; Sendo assim, **não acessa** esses dados na **memória física** e **sim** os dados que estão **no disco** **como se fosse a memória física**. Conforme sua necessidade, **consequentemente, carrega e acessa esses dados na memória**.
 Resumidamente o mapeamento de memória é realizado dentro da memória virtual.
 
 **MMAP**: 
@@ -27,22 +26,24 @@ A decisão para escolha da página de descarte e realizada com base no algoritmo
 
 #### Memória residente
 ----------
-Basicamente é a parte da memória que não podem ser substituídas e ficam sempre na memória.
+Basicamente é a parte da memória que não pode ser substituída.
 O mongoDB trabalha esse conceito através dos seguintes pontos.
 
 **Conjunto de trabalho (Working Set)**:
 
-E a porção dos dados de maior acesso, de uso frequente, pelo cliente [mongod](https://docs.mongodb.org/manual/reference/program/mongod/) ou [mongos](https://docs.mongodb.org/manual/reference/program/mongos/), ou seja, **como parte do nosso working set teremos índices e  um subconjunto de seus dados mediante a frequência de uso**. 
-Com isso, esse conjunto de trabalho deve ficar na memória para melhor desempenho, caso contrario, a utilização desses dados no disco, a menos que estivermos usando [SSD](https://pt.wikipedia.org/wiki/SSD), pode causar lentidão.
+E a porção dos dados de maior acesso, de uso frequente pelo cliente [mongod](https://docs.mongodb.org/manual/reference/program/mongod/) ou [mongos](https://docs.mongodb.org/manual/reference/program/mongos/), ou seja, **como parte do nosso working set teremos índices e  um subconjunto de seus dados mediante a frequência de uso**. 
 
-> A partir da versão 2.4, **podemos configurar o tamaho do nosso working set**, mas você deve se pergunta. 
 
-Então, podemos nos perguntar.
-**Qual tamanho devemos definir**, um vezes que, **não pode existe diferença entre o tamanho da memoria residente e do conjunto de trabalho?**
+Onde esse conjunto de trabalho fica ou deve ficar na memória para melhor desempenho, caso contrario, a utilização desses dados no disco, a menos que estivermos usando [SSD](https://pt.wikipedia.org/wiki/SSD), pode causar lentidão.
 
-Ter bom conhecimento sobre a base, pelo tamanho médio dos documentos utilizados e índices utilizados, assim como chaves, são os meios nos quais devemos nos basear para definir seu tamanho.
+Utilizando o comando  [db.stats()](https://docs.mongodb.org/manual/reference/method/db.stats/), podemos chegar ao valor máximo do working set de uma  determinada base somando os seguintes parâmetros
 
- E não é uma tarefa simples, pois precisamos entender o que estamos realmente usando e o que pode ser atribuído como residente para o processo mongod.
++ **datasize** - Que é o tamanho total da base
++ **IndexSize** - Cujo é o tamanho total dos índices criados nessa base
+
+Porém, não significa que esse total seja ou esteja de fato ativo.
+
+ E não é uma tarefa simples saber, pois precisamos entender o que estamos realmente sendo usando e o que pode ser atribuído como residente para o processo mongod ou mongos.
 Além disse , estatisticamente, a memória residente pode ser maior do que working set ou menor do que o working set.
 
 O motivo para o qual a memória residente pode vi a ser menor do que o working set e o funcionamento interno do journal.
@@ -51,6 +52,7 @@ O motivo para o qual a memória residente pode vi a ser menor do que o working s
 
 Neste caso quando estatisticamente você percebe uma ligeira quebra de memória residente  em relação ao working set, isso e por conta do remapeamento realizado pelo journal, para garantir a durabilidade dos dados.
 
+Ter bom conhecimento sobre a base, pelo tamanho médio dos documentos utilizados e índices utilizados, assim como chaves, são os meios nos quais devemos nos basear para definir seu tamanho.
 
 
 
