@@ -31,7 +31,7 @@ O mongoDB trabalha esse conceito através dos seguintes pontos.
 
 **Conjunto de trabalho (Working Set)**:
 
-E a porção dos dados de maior acesso, de uso frequente pelo cliente [mongod](https://docs.mongodb.org/manual/reference/program/mongod/) ou [mongos](https://docs.mongodb.org/manual/reference/program/mongos/), ou seja, **como parte do nosso working set teremos índices e  um subconjunto de seus dados mediante a frequência de uso**. 
+E a porção dos dados de maior acesso, de uso frequente pelo cliente [mongod](https://docs.mongodb.org/manual/reference/program/mongod/) ou [mongos](https://docs.mongodb.org/manual/reference/program/mongos/), ou seja, **como parte do nosso working set teremos índices e um subconjunto de seus dados mediante a frequência de uso**. 
 
 
 Onde esse conjunto de trabalho fica ou deve ficar na memória para melhor desempenho, caso contrario, a utilização desses dados no disco, a menos que estivermos usando [SSD](https://pt.wikipedia.org/wiki/SSD), pode causar lentidão.
@@ -42,17 +42,22 @@ Utilizando o comando  [db.stats()](https://docs.mongodb.org/manual/reference/met
 + **IndexSize** - Cujo é o tamanho total dos índices criados nessa base
 
 Porém, não significa que esse total seja ou esteja de fato ativo.
-
- E não é uma tarefa simples saber, pois precisamos entender o que estamos realmente sendo usando e o que pode ser atribuído como residente para o processo mongod ou mongos.
 Além disse , estatisticamente, a memória residente pode ser maior do que working set ou menor do que o working set.
 
 O motivo para o qual a memória residente pode vi a ser menor do que o working set e o funcionamento interno do journal.
 
-**Journal** como sabemos tem a função dar durabilidade aos dados no MongoDB e da forma na qual ele funciona **pode impactar** sobre o que e considerado residente na memória para o processo mongod, **pois com journal a quantidade de memória virtual em uso e duplicada.**
-
-Neste caso quando estatisticamente você percebe uma ligeira quebra de memória residente  em relação ao working set, isso e por conta do remapeamento realizado pelo journal, para garantir a durabilidade dos dados.
-
-Ter bom conhecimento sobre a base, pelo tamanho médio dos documentos utilizados e índices utilizados, assim como chaves, são os meios nos quais devemos nos basear para definir seu tamanho.
+**Journal**, como sabemos, tem a função dar durabilidade aos dados no MongoDB e da forma na qual ele funciona **pode impactar** sobre o que e considerado residente na memória para o processo mongod, **pois com journal a quantidade de memória virtual em uso e duplicada.**
 
 
+Neste caso, quando estatisticamente você percebe uma ligeira queda de memória residente em relação ao working set, isso e por conta do remapeamento realizado pelo journal, para garantir a durabilidade dos dados mediante a atualizações e inserções.
+
+Por isso bom conhecimento sobre a base, índices utilizados e chaves,  são os meios nos quais devemos nos basear para identificarmos possíveis impactos no desempenho.
+
+Na versão 2.4 foi adiciona um estimador para o  working set ao [**serverStatus**](https://docs.mongodb.org/manual/reference/command/serverStatus/#dbcmd.serverStatus).
+>db.runCommand( { serverStatus: 1 } )
+
+Porém, na versão 3.0 o mesmo foi removido. Dessa forma a equipe de desenvolvedores do MongoDB recomendam o uso do [MMS](https://www.mongodb.com/post/10764757533/announcing-mongodb-monitoring-service-mms) (MongoDB Monitoring Service)
+
+
+**Processo de restart e limpeza de memória**:
 
