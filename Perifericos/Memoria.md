@@ -46,7 +46,7 @@ Além disse , estatisticamente, a memória residente pode ser maior do que worki
 
 O motivo para o qual a memória residente pode vi a ser menor do que o working set e o funcionamento interno do journal, **pois com journal a quantidade de memória virtual em uso e duplicada.**
 
-Neste caso quando estatisticamente você percebe uma ligeira queda de memória residente em relação ao working set, isso e por conta do remapeamento realizado pelo journal, para garantir a durabilidade dos dados mediante a atualizações e inserções.
+Neste caso, quando estatisticamente você percebe uma ligeira queda de memória residente em relação ao working set, isso e por conta do remapeamento realizado pelo journal, para garantir a durabilidade dos dados mediante as atualizações e inserções.
 
 Por isso, bom conhecimento sobre a base, índices utilizados e chaves,  são os meios nos quais devemos nos basear para identificarmos possíveis impactos no desempenho.
 Assim como, deduzir o quanto de memória e necessário para o bom desempenho da aplicação.
