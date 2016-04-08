@@ -55,6 +55,46 @@ Lembrando que, além da estimativa de uso da memória pelo working set, também,
 
 Ou seja, o conjunto de todos esses fatores nos dará embasamento para que possamos determina se a quantidade de memória física disponível atenderá ou não a necessidade de uma determinada aplicação.
 
+Utilizando a **engine Wiredtiger**, o mesmo utiliza dois sistemas de cache, o cache do próprio sistema de arquivos  e o cache Wiredtiger.
+Assim, de certo modo, não há necessidade de nos preocuparmos com o ajuste da memória, pois não havendo espaço suficiente para carrega os dados adicionas, WiredTiger expulsa páginas do cache para liberar espaço.
+
+**O cache WiredTiger utiliza 1GB ou metade da memória RAM**, sendo possível especificar um tamanho através da configuração.
+
+> [**storage.wiredTiger.engineConfig.cacheSizeGB**](https://docs.mongodb.org/manual/reference/configuration-options/#storage.wiredTiger.engineConfig.cacheSizeGB)
+
+É recomendado que ao utilizar varias instâncias, no mesmo sistema, o valor do cache seja reduzido. 
 
 **Processo de restart e limpeza de memória**:
 
+ 
+Ao reiniciarmos um processo MongoDB, não temos falhas graves de páginas, pois mesmo reiniciando um instância, os dados ainda ficam na memória.
+
+Com o mecanismo de armazenamento MMAPv1, falhas de página pode ocorrer ao lê ou grava dados para arquivos de dados que não estão localizados na memória física. Em contraste, falhas de página do sistema operacional acontecer quando a memória física está esgotado e as páginas de memória física são trocados para o disco.
+
+No entanto, se não houver memória livre, o sistema operacional deve:
+
+* encontrar uma página na memória que é obsoleto ou desnecessária e escreve a página para o disco.
+* ler a página solicitada a partir do disco e carregá-lo na memória.
+
+Este processo, em um sistema ativo, podem levar um longo tempo, especialmente em relação à leitura de uma página que já está na memória.
+
+Ao reinicializarmos o sistema todos os cache serão invalidados. Isso fará que ocorra muita atividade de erro de página , sendo de total oposto de quando apenas reiniciamos o processo mongod ou mongos, porém e algo esperado.
+Há, também, a possibilidade de limparmos o cache sem necessidade de reinicializarmos o sistema, uma vez que a reinicialização pode ser demorada.
+
+**No Linux:**
+
+- stop mongod
+- sh -c "sync; echo 3 > /proc/sys/vm/drop_caches"
+- start mongod
+
+**No Windows:**
+
+- Faça download da ferramenta [RAMMap](https://download.sysinternals.com/files/RAMMap.zip)
+- Selecione mapped file
+- Clique em empty
+- Clique me empty standby list
+
+![enter image description here](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/RAMMap.png)
+
+
+ 
