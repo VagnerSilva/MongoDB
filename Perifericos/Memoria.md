@@ -12,7 +12,7 @@ Resumidamente o mapeamento de memória é realizado dentro da memória virtual.
 
 
 
-Obviamente essa rotina apenas acontece até a memória física ficar cheia (full)
+Obviamente essa rotina acontece até a memória física ficar cheia (full)
 Quando isso ocorre, temos um novo conceito aqui.
 
 
@@ -48,14 +48,14 @@ O motivo para o qual a memória residente pode vi a ser menor do que o working s
 
 Neste caso, quando estatisticamente você percebe uma ligeira queda de memória residente em relação ao working set, isso e por conta do remapeamento realizado pelo journal, para garantir a durabilidade dos dados mediante as atualizações e inserções.
 
-Por isso, bom conhecimento sobre a base, índices utilizados e chaves,  são os meios nos quais devemos nos basear para identificarmos possíveis impactos no desempenho.
+Por isso, bom conhecimento sobre a base, índices utilizados e chaves, são os meios nos quais devemos nos basear para identificarmos possíveis impactos no desempenho.
 Assim como, deduzir o quanto de memória e necessário para o bom desempenho da aplicação.
 
 Lembrando que, além da estimativa de uso da memória pelo working set, também, devemos considera as conexões , onde para cada conexão temos o consumo de 1MB podemos ser no máximo 20.000 conexões por instância e, também, quantas instâncias do MongoDB estão sendo executadas no sistema, pois para cada instância o consumo do working set pode variar. 
 
 Ou seja, o conjunto de todos esses fatores nos dará embasamento para que possamos determina se a quantidade de memória física disponível atenderá ou não a necessidade de uma determinada aplicação.
 
-Utilizando a **engine Wiredtiger**, o mesmo utiliza dois sistemas de cache, o cache do próprio sistema de arquivos  e o cache Wiredtiger.
+Utilizando a **engine Wiredtiger**, o mesmo utiliza dois sistemas de cache, o cache do próprio sistema de arquivos e o cache Wiredtiger.
 Assim, de certo modo, não há necessidade de nos preocuparmos com o ajuste da memória, pois não havendo espaço suficiente para carrega os dados adicionas, WiredTiger expulsa páginas do cache para liberar espaço.
 
 **O cache WiredTiger utiliza 1GB ou metade da memória RAM**, sendo possível especificar um tamanho através da configuração.
@@ -66,17 +66,7 @@ Assim, de certo modo, não há necessidade de nos preocuparmos com o ajuste da m
 
 **Processo de restart e limpeza de memória**:
 
- 
 Ao reiniciarmos um processo MongoDB, não temos falhas graves de páginas, pois mesmo reiniciando um instância, os dados ainda ficam na memória.
-
-Com o mecanismo de armazenamento MMAPv1, falhas de página pode ocorrer ao lê ou grava dados para arquivos de dados que não estão localizados na memória física. Em contraste, falhas de página do sistema operacional acontecer quando a memória física está esgotado e as páginas de memória física são trocados para o disco.
-
-No entanto, se não houver memória livre, o sistema operacional deve:
-
-* encontrar uma página na memória que é obsoleto ou desnecessária e escreve a página para o disco.
-* ler a página solicitada a partir do disco e carregá-lo na memória.
-
-Este processo, em um sistema ativo, podem levar um longo tempo, especialmente em relação à leitura de uma página que já está na memória.
 
 Ao reinicializarmos o sistema todos os cache serão invalidados. Isso fará que ocorra muita atividade de erro de página , sendo de total oposto de quando apenas reiniciamos o processo mongod ou mongos, porém e algo esperado.
 Há, também, a possibilidade de limparmos o cache sem necessidade de reinicializarmos o sistema, uma vez que a reinicialização pode ser demorada.
@@ -96,5 +86,9 @@ Há, também, a possibilidade de limparmos o cache sem necessidade de reiniciali
 
 ![enter image description here](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/RAMMap.png)
 
+Com o mecanismo de armazenamento MMAPv1, falhas de página pode ocorrer ao lê ou grava dados para arquivos de dados que não estão localizados na memória física. Em contraste, falhas de página do sistema operacional acontecer quando a memória física está esgotado e as páginas de memória física são trocados para o disco.
 
- 
+No entanto, se não houver memória livre, o sistema operacional deve:
+
+* encontrar uma página na memória que é obsoleto ou desnecessária e escreve a página para o disco.
+* ler a página solicitada a partir do disco e carregá-lo na memória.
