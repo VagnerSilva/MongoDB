@@ -19,7 +19,7 @@ A iteração, pode ser um vilão ou um herói , se tratando de consumo de proces
 Por exemplo, se efetuarmos um **consulta**  usando recursos de pesquisa tais como ,**distinct** e **count**,  e se **reduzimos sua ranger de iteração** para milhares, ao em vez utilizarmos uma consulta simples que varre milhões de dado, isso pode contribuir para uma melhoria de desempenho de forma bastante significativa.
 
 **Clock Speed:** 
-A velocidade de processamento também e um fator importante no desempenho. Portanto e recomenda CPUs com frequência maior ou igual a **2.4GHz** , assim como, modelos  iguais ou melhores que os processadores **i5**.
+A velocidade de processamento também e um fator importante no desempenho. Portanto, recomenda-se CPUs com frequência maior ou igual a **2.4GHz** , assim como, modelos  iguais ou melhores que os processadores **i5**.
 
 **Servidor:** 
 Recursos utilizados do lado do servidor, tais como **Map-Reduce** e **Intensive Aggregation Framework**, podem potencialmente aumento o consumo do CPU do usuário.
