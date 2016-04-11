@@ -20,7 +20,7 @@ Assim sendo, quando inserimos dados num banco, ao alocar esse dado um arquivo de
 ![pre-alocado](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/pre-aloca.png)
 
 **Journal**
-Cujo a função básica e garantir a durabilidade dos dados, também, utiliza  o recurso de pré-alocação.
+Cujo a função básica e garantir a durabilidade dos dados, também, utiliza o recurso de pré-alocação.
 No caso do mecanismo de armazenamento **MMPAv1**, são **3** arquivos de **1GB** , no máximo, e no **WiredTiger**  3 de **128MB**. 
 >>(falaremos mais sobre MMPAV1 e WiredTiger no topico de configurações)
 
@@ -29,20 +29,21 @@ Basicamente utilizado para recuperação dos dados, ao utilizarmos um conjuntos 
 
 ####Conceitos formais
 ----------
-Com o entendimento de como o banco trabalha sua alocação de dados, vamos ao seguinte exemplo.
+Com o entendimento de como o banco trabalha e sua alocação de dados, vamos ao seguinte exemplo.
 
-Considerando que temos  uma unidade de **100GB**, onde usaremos um conjunto de replicas.
+Considerando que temos uma unidade de **100GB**, onde usaremos um conjunto de replicas.
 
- Sendo assim, sabemos que  o oplog será gerado e consumira **5% do espaço livre.**
-Considerando que temos **100GB  de espaço livre**, desta forma, teríamos **5GB**   de espaço sendo pré-alocado.
+Sendo assim, sabemos que o oplog será gerado e consumira **5% do espaço livre.**
+Considerando que temos **100GB de espaço livre**, desta forma, teríamos **5GB** de espaço sendo pré-alocado.
 Vejamos na image o consumo do disco numa suposta inicialização, onde optamos pela engine **MMPAv1**.
 
 ![ex1](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/ex1.png)
 
-Na imagem, podemos perceber que numa simples inicialização facilmente consumimos  aproximados **8,20%** do espaço disponível, porém o MongoDB nos da opções para atenuarmos esse consumo.
+Na imagem, podemos perceber que uma simples inicialização facilmente consome aproximados **8,20%** do espaço disponível, porém o MongoDB nos da opções para atenuarmos esse consumo.
 
-Podemos, por exemplo, configura o **oplog** para consumir **1GB**,
-configura o journal , para utilizar  a opção de **smallfiles** que consome **384MB**, no máximo, e em seguida, a atribuição  inicial e fatorada por 4, passando de **64MB** para **16MB** e sua pré-alocação de **128MB** para **32MB**, o que e bastente significativo
+
+Podemos, por exemplo, configura o  [**oplog**](https://docs.mongodb.org/manual/reference/configuration-options/#replication.oplogSizeMB) para consumir **1GB**,
+configura o journal , para utilizar a opção de **smallfiles** que consome **384MB**, no máximo, e em seguida, a atribuição inicial e fatorada por 4, passando de **64MB** para **16MB** e sua pré-alocação de **128MB** para **32MB**, o que e bastente significativo
 
 ![ex2](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/ex2.png)
 
