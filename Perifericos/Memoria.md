@@ -3,7 +3,7 @@
 #### Mapeamento de memória
 ----------
 
-E implementada através do sistema [**MMAP**](https://pt.wikipedia.org/wiki/Mmap), de modo sucinto, ele **mapeai  todos os arquivos em um espaço endereçável na memória virtual**; Sendo assim, **não acessa** esses dados na **memória física** e **sim** os dados que estão **no disco** **como se fosse a memória física**. Conforme sua necessidade, **consequentemente, carrega e acessa esses dados na memória**.
+E implementada através do sistema [**MMAP**](https://pt.wikipedia.org/wiki/Mmap), de modo sucinto, ele **mapeai  todos os arquivos em um espaço endereçável na memória virtual**; Sendo assim, **não acessa** esses dados na **memória física** e **sim** os dados que estão **no disco** **de uma forma direta, a grossso modo.**. Conforme sua necessidade, **consequentemente, carrega e acessa esses dados na memória**.
 Resumidamente o mapeamento de memória é realizado dentro da memória virtual.
 
 **MMAP**: 
@@ -20,7 +20,7 @@ Quando isso ocorre, temos um novo conceito aqui.
 #### Substituição de página
 ----------
 Quando **a memória atingir seu limite**, **e necessário  encontra espaço**, para que o próximo conteúdo ([página](https://pt.wikipedia.org/wiki/Mem%C3%B3ria_paginada)) seja alocado na memoria.
-Dessa forma, **e preciso encontra um página para descarte e escreve esse conteúdo de descarte, no disco** para que a nova página seja alocada na memória.
+Dessa forma, **e preciso encontra uma página para descarte e escreve esse conteúdo de descarte no disco**, para que a nova página seja alocada na memória.
 
 A decisão para escolha da página de descarte e realizada com base no algoritmo **LRU**  (Least Recently Used) , como o nome sugere, e a parte da memoria menos acessada.
 
@@ -92,3 +92,9 @@ No entanto, se não houver memória livre, o sistema operacional deve:
 
 * encontrar uma página na memória que é obsoleto ou desnecessária e escreve a página para o disco.
 * ler a página solicitada a partir do disco e carregá-lo na memória.
+
+#### Conclusão
+A primeira coisa a mencionar e que MongoDB usa arquivos de memória mapeada.
+Então, esse mapeamento esta contido na memória virtual (disco)
+Posteriormente, é carregado na memória fisica (ram)
+Com a capacidade de memória utilizada no máximo, MongoDB se utiliza do algoritimo LRU, para tomada de decisão de descarte da memória. Onde é descartado a memória de menor frequencia de uso, para alocação de novos dados.
