@@ -86,7 +86,7 @@ Há, também, a possibilidade de limparmos o cache sem necessidade de reiniciali
 
 ![enter image description here](https://github.com/VagnerSilva/MongoDB/blob/master/Perifericos/imgs/RAMMap.png)
 
-Com o mecanismo de armazenamento MMAPv1, falhas de página pode ocorrer ao lê ou grava dados para arquivos de dados que não estão localizados na memória física. Em contraste, falhas de página do sistema operacional acontecer quando a memória física está esgotado e as páginas de memória física são trocados para o disco.
+Com o mecanismo de armazenamento MMAPv1, falhas de página pode ocorrer ao lê ou grava dados para arquivos de dados que não estão localizados na memória física. Em contraste, falhas de página do sistema operacional acontece quando a memória física está esgotado e as páginas de memória física são trocados para o disco.
 
 No entanto, se não houver memória livre, o sistema operacional deve:
 
