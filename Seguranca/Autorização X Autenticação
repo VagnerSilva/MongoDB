@@ -1,0 +1,31 @@
+#### Autentificação
+Identifica, verifica, valida o usuário.
+
+#### Autorização
+Verifica os privilégios do usuário.
+
+Mecanismo de Autentificação 
+-------------
+Basicamente no MongoDB e divido em duas partes, categorias.
+
+**Cliente/Autenticação do usuário**, cujo é a forma que cliente autentica no MongoDB , E, posteriormente, **autenticação interna** , cujo a forma que diferentes membros de uma replica definem ou compartilham a autenticação com o outro. 
+Sendo assim, temos os seguintes mecanismos de autenticação
+
+> **Cliente/Autenticação do usuário:**
+:  Versão de Comunidade
+>  
+  > **Challange/Response (Pergunta e responta)**
+  >> SCRAM-SHA-1
+  > > MongoDB-CR 
+  > 
+>  **Autenticação via Certificado**
+> >  X.509
+: Versão para Enterprise
+> **Autenticação Externa**
+>>   LDAP
+> Kerberos
+
+
+>  **Autenticação interna:**
+>> - KeyFile(SCRAM-SHA-1)
+> - x.509
