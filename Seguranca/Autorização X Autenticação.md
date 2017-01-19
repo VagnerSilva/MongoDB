@@ -71,3 +71,10 @@ Para isso o MongoDB, atualmente dá suporte a dois tipos de autenticação inter
 
 ***Com o Keyfile*** o conteúdo agi como uma senha compartilhada entre os membros de replicas ou cluster shared. 
 ***A mesma chave deve está presente em cada um dos membros que comunicam entre si.***. Sendo assim, e altamente importante que se mantenha tal arquivo (senha) de maneira segura, onde o mesmo deve ter de no minimo 6 à 1024 caracteres e só pode conter  caracteres no conjunto da **[BASE64](https://pt.wikipedia.org/wiki/Base64)**, onde, também devemos ressaltar que **espaços em brancos são ignorados.**
+
+***X.509***
+Se utiliza de certificados para autenticar os membros (replicas set e shardes)
+Embora você pode utiliza o certificado para ambos os membros, é altamente recomendado que se utilize um certificado diferente para cada um dos membros.
+Dessa forma se um certificado for comprometido, você emite apenas um novo certificado para um único  membro ao em vez de reconfigura todo seu cluster.
+
+É importante dizer que ao utilizamos os mecanismo de autenticação interna de forma automática e ativado a autenticação do cliente
