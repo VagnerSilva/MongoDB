@@ -60,14 +60,12 @@ Ele fornece um mecanismo para acessar e manter informações de diretório distr
 ## **Kerberos**
 Assim como o LDAP,  Kerberos só esta presente na versão Enterprise do MongoDB.
 Desenvolvido no MIT ,  [Kerberos](https://pt.wikipedia.org/wiki/Kerberos) é um protocolo  de autenticação e é amplamente aceito por ser bastante seguro seu método de autenticação.
-Diferente do LDAP ele é especifico para fins de autenticação , onde o LDAP, de modo especifico,  é mais voltado para armazenamento de metadados sobre o usuário a organização.
-Como o LDAP , Kerberos e uma forma de autenticação externa, onde o acesso ao MongoDB ocorre através de credenciais do Kerberos. O que significa que as credencias não são armazenadas no MongoDB
-
-Dessa forma, Podemos nos autenticar no MongoDB, através das credenciais do LDAP, fazendo com que o acesso seja feito de forma externa. Ou seja, as credenciais de acesso não está no cliente MongoDB, como os mecanismos anteriores e sim no servidor de acesso LDAP
+Diferente do LDAP ele é especifico para fins de autenticação , onde o LDAP, de modo especifico,  é mais voltado para armazenamento de metadados sobre o usuário da organização.
+Como o LDAP , Kerberos e uma forma de autenticação externa, onde o acesso ao MongoDB ocorre através de credenciais do Kerberos. O que significa que as credencias não são armazenadas no MongoDB.
 
 ## **Autenticação Interna**
-Mesmo estando em um rede interna, corporativa, considerada "segura", ainda sim , e importante que as comunicações entre os servidores de replicas ou cluster shared do MongoDB sejam autenticadas.
-Para isso o MongoDB, atualmente dá suporte a dois tipos de autenticação interna o **Keyfile**  que usa SCRAM-SHA-1 e o X.509
+Mesmo estando em um rede interna, corporativa, considerada "segura", ainda sim , é importante que as comunicações entre os servidores de replicas ou cluster shared do MongoDB sejam autenticadas.
+Para isso o MongoDB atualmente dá suporte a dois tipos de autenticação interna o **Keyfile**  que usa SCRAM-SHA-1 e o **X.509**.
 
 ***Com o Keyfile*** o conteúdo agi como uma senha compartilhada entre os membros de replicas ou cluster shared. 
 ***A mesma chave deve está presente em cada um dos membros que comunicam entre si.***. Sendo assim, e altamente importante que se mantenha tal arquivo (senha) de maneira segura, onde o mesmo deve ter de no minimo 6 à 1024 caracteres e só pode conter  caracteres no conjunto da **[BASE64](https://pt.wikipedia.org/wiki/Base64)**, onde, também devemos ressaltar que **espaços em brancos são ignorados.**
@@ -77,4 +75,4 @@ Se utiliza de certificados para autenticar os membros (replicas set e shardes)
 Embora você pode utiliza o certificado para ambos os membros, é altamente recomendado que se utilize um certificado diferente para cada um dos membros.
 Dessa forma se um certificado for comprometido, você emite apenas um novo certificado para um único  membro ao em vez de reconfigura todo seu cluster.
 
-É importante dizer que ao utilizamos os mecanismo de autenticação interna de forma automática e ativado a autenticação do cliente
+É importante dizer que ao utilizamos os mecanismo de autenticação interna de forma automática e ativado a autenticação do cliente.
