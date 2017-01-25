@@ -22,6 +22,6 @@ Porém, **localmente**  temos algumas exceções, dessa forma **podemos criar, `
 
 ![create](https://github.com/VagnerSilva/MongoDB/blob/master/Seguranca/imgs/create.PNG)
 
-E assim, efetuarmos a autenticação pelo comando **db.auth**, caso não  haja nem um problema teremos o **valor  1** retornando como usuário autenticado.
+E assim, efetuarmos a autenticação pelo comando **db.auth**, caso não  haja nem um problema teremos o **valor  1** indicando que nosso usuário foi autenticado.
 
 ![create](https://github.com/VagnerSilva/MongoDB/blob/master/Seguranca/imgs/dbAuth.PNG)
