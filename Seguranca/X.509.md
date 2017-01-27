@@ -18,9 +18,9 @@ Para produção deve-se utilizar certificados validos **assinados por uma unica 
 Ou seja, a Autoridade de Certificação (**CA**),  **deve, obrigatoriamente, ser utilizada na geração dos cerificados clientes e servidor(es).**
 Frisando que,  **cada instância do MongoDB deve conter um certificado exclusivo.**
 
-O **certificado do cliente** de conter os seguintes campos
+O **certificado do cliente** deve conter os seguintes campos:
 > **keyUsage** = digitalSignature
-	**extendedKeyUsage** = clientAuth
+**extendedKeyUsage** = clientAuth
 
 Também, o assunto (parâmetro **subject**) **deve conter seu nome de distinto** (Distinguished Name (**DN**)), **deferente** de qualquer servidor, Seja ele um ReplicaSet ou Shared.
 
