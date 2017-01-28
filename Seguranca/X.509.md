@@ -31,6 +31,6 @@ Também, o assunto (parâmetro **subject**) **deve conter seu nome de distinto**
 > 
 > Domain Component (**DC**). - Componente de Domínio
 
-**Deve-se diferenciar de ao menos um desses atributos em relação aos outros certificados**.
+**Ao menos um desses atributos deve-se diferenciar em relação aos outros certificados**.
 
 Pois **a utilização, de um certificação cliente, com o mesmo dado**, de um certificado membro( replicaSet ou Shared) **implicará na permissão total no sistema**, uma vez que o cliente será identificado como parte do cluster.
